@@ -25,6 +25,14 @@ import { buildConfig } from 'payload/config'
 import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
+import { Users } from './src/collections/users';
+import { Sites } from './src/collections/sites';
+import { Media } from './src/collections/media';
+import { ContactRequests } from './src/collections/contactRequests';
+import { Pages } from './src/collections/pages';
+import { Agent } from './src/collections/agent';
+import { seed } from './seed';
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -32,41 +40,12 @@ export default buildConfig({
   //editor: slateEditor({}),
   editor: lexicalEditor(),
   collections: [
-    {
-      slug: 'users',
-      auth: true,
-      access: {
-        delete: () => false,
-        update: () => false,
-      },
-      fields: [],
-    },
-    {
-      slug: 'pages',
-      admin: {
-        useAsTitle: 'title',
-      },
-      fields: [
-        {
-          name: 'title',
-          type: 'text',
-        },
-        {
-          name: 'content',
-          type: 'richText',
-        },
-      ],
-    },
-    {
-      slug: 'media',
-      upload: true,
-      fields: [
-        {
-          name: 'text',
-          type: 'text',
-        },
-      ],
-    },
+    ContactRequests,
+    Media,
+    Pages,
+    Sites,
+    Users,
+    Agent,
   ],
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -97,20 +76,7 @@ export default buildConfig({
     },
   },
   async onInit(payload) {
-    const existingUsers = await payload.find({
-      collection: 'users',
-      limit: 1,
-    })
-
-    if (existingUsers.docs.length === 0) {
-      await payload.create({
-        collection: 'users',
-        data: {
-          email: 'dev@payloadcms.com',
-          password: 'test',
-        },
-      })
-    }
+    
   },
   // Sharp is now an optional dependency -
   // if you want to resize images, crop, set focal point, etc.
