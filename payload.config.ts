@@ -49,15 +49,9 @@ export default buildConfig({
     Agent,
   ],
   secret: process.env.PAYLOAD_SECRET || '',
-  // email: resend,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  // db: postgresAdapter({
-  //   pool: {
-  //     connectionString: process.env.POSTGRES_URI || ''
-  //   }
-  // }),
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
   }),
