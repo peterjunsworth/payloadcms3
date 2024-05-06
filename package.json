@@ -31,6 +31,7 @@
     "graphql": "^16.8.1",
     "next": "14.3.0-canary.28",
     "payload": "3.0.0-beta.21",
+    "qs": "^6.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
