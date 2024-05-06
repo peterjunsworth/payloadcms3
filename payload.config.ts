@@ -32,6 +32,7 @@ import { ContactRequests } from './src/collections/contactRequests';
 import { Pages } from './src/collections/pages';
 import { Agent } from './src/collections/agent';
 import { seed } from './seed';
+import { resendAdapter } from '@payloadcms/email-resend'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -48,6 +49,7 @@ export default buildConfig({
     Agent,
   ],
   secret: process.env.PAYLOAD_SECRET || '',
+  // email: resend,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
@@ -59,7 +61,6 @@ export default buildConfig({
   db: mongooseAdapter({
     url: process.env.MONGODB_URI || '',
   }),
-
   /**
    * Payload can now accept specific translations from 'payload/i18n/en'
    * This is completely optional and will default to English if not provided
@@ -67,7 +68,11 @@ export default buildConfig({
   i18n: {
     supportedLanguages: { en },
   },
-
+  email: resendAdapter({
+    defaultFromAddress: process.env.FROM_EMAIL || '',
+    defaultFromName: 'Payload CMS',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   admin: {
     autoLogin: {
       email: 'dev@payloadcms.com',
