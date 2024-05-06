@@ -73,7 +73,7 @@ export default function Login() {
             ✨ Send Magic Link
           </Button>
           <Link
-            href="mailto:help@kanvarta.com"
+            href="mailto:help@smover.com"
             className="-mt-3 w-full text-base rounded-[16px] p-3 text-center text-primary-700 transition-all duration-250 ease-in-out hover:underline cursor-pointer"
           >
             Having Trouble?
