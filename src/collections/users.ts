@@ -1,24 +1,47 @@
 import { CollectionConfig } from 'payload/types';
 import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf } from '../access/isAdminOrSelf';
+import { isAnonymous } from '@/access/anonymous';
+import { User } from "../../payload-types";
+
+interface EmailData {
+  req: any; // Replace 'any' with the appropriate type for req
+  token: string;
+  user: any; // Replace 'any' with the appropriate type for user
+}
 
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: {
-    // This property controls how deeply "populated"
-    // relationship docs are that are stored in the req.user.
-    // It should be kept to as low as possible, which 
-    // keeps performance fast.
-    depth: 0,
+    forgotPassword: {
+      generateEmailSubject: () => 'Reset your password',
+      generateEmailHTML: ({ req, token, user }: any) => {
+        // Use the token provided to allow your user to reset their password
+        const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
+        return `
+          <!doctype html>
+          <html>
+            <body>
+              <h1>Here is my custom email template!</h1>
+              <p>Hello, ${user.email}!</p>
+              <p>Click below to reset your password.</p>
+              <p>
+                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
+              </p>
+            </body>
+          </html>
+        `
+      },
+    },
   },
   admin: {
     useAsTitle: 'email',
   },
   access: {
     // Only admins can create users
-    create: isAdmin,
+    create: isAnonymous,
     // Admins can read all, but any other logged in user can only read themselves
-    read: isAdminOrSelf,
+    read: isAnonymous,
     // Admins can update all, but any other logged in user can only update themselves
     update: isAdminOrSelf,
     // Only admins can delete
@@ -31,12 +54,12 @@ export const Users: CollectionConfig = {
         {
           name: 'firstName',
           type: 'text',
-          required: true,
+          required: false,
         },
         {
           name: 'lastName',
           type: 'text',
-          required: true,
+          required: false,
         },
       ],
     },
