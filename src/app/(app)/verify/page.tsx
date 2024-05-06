@@ -39,7 +39,7 @@ export default function Verify() {
       }
     }
     if (token) verifyUser();
-  }, [token]);
+  }, [token, router, uuid]);
 
   return (
     <>
