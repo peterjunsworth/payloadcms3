@@ -67,6 +67,12 @@ export const Agent: CollectionConfig = {
   },
   fields: [
     {
+      name: 'owner', // required
+      type: 'relationship', // required
+      relationTo: 'users', // required
+      hasMany: false,
+    },
+    {
       type: 'row',
       fields: profileBlock.fields,
     },
