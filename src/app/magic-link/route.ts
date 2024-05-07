@@ -54,5 +54,9 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const prom = await forgotPassword.json();
   console.log(prom);
 
+  setTimeout(() => {
+    console.log("SLEEPING");
+  }, 3000)
+
   return Response.json({ success: true });
 }
