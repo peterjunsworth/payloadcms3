@@ -56,7 +56,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   setTimeout(() => {
     console.log("SLEEPING");
+    return Response.json({ success: true });
   }, 3000)
 
-  return Response.json({ success: true });
+  
 }
