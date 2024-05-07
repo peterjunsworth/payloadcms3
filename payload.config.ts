@@ -47,12 +47,11 @@ export default buildConfig({
   i18n: {
     supportedLanguages: { en },
   },
-  // COMMENTING OUT THIS AS VERCEL HAS ISSUE SENDING VIA REST
-  /*email: resendAdapter({
+  email: resendAdapter({
     defaultFromAddress: 'info@smover.noenough.com',
     defaultFromName: 'Payload CMS',
     apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
-  }),*/
+  }),
   admin: {
     autoLogin: {
       email: 'dev@payloadcms.com',
