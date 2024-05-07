@@ -24,7 +24,23 @@ export const Users: CollectionConfig = {
           subject: "Your Magic Sign-in Link",
           react: MagicLinkEmail({magicLink: token}),
         });
-        return ''
+        
+        console.log('##$#$#$#$#$#$#$#');
+        const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
+        console.log(resetPasswordURL);
+        return `
+          <!doctype html>
+          <html>
+            <body>
+              <h1>Here is my custom email template!</h1>
+              <p>Hello, ${user.email}!</p>
+              <p>Click below to reset your password.</p>
+              <p>
+                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
+              </p>
+            </body>
+          </html>
+        `
       },
     },
   },
