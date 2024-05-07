@@ -41,12 +41,7 @@ export const Users: CollectionConfig = {
     afterForgotPassword: [async (args) => {
       console.log("inside Hook");
       console.log(args);
-      return await resend.emails.send({
-        from: "info@smover.noenough.com",
-        to: "peterjunsworth@gmail.com",
-        subject: "Your Magic Sign-in Link",
-        react: MagicLinkEmail({magicLink: "1234567890"}),
-      });
+      return;
     }],
   },
   admin: {
