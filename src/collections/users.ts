@@ -18,6 +18,7 @@ export const Users: CollectionConfig = {
       generateEmailHTML: ({ req, token, user }: any) => {
         console.log('##$#$#$#$#$#$#$#');
         const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
+        console.log(resetPasswordURL);
         return `
           <!doctype html>
           <html>
