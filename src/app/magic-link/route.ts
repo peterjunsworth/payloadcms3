@@ -51,7 +51,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   });
 
   console.log("AFTER");
-  console.log(forgotPassword);
+  console.log(forgotPassword.json());
 
   return Response.json({ success: true });
 }
