@@ -5,18 +5,22 @@ import { isAnonymous } from '@/access/anonymous';
 import { resend } from "../helpers/config";
 import MagicLinkEmail from "../emails/magic-link-email";
 
-interface EmailData {
-  req: any; // Replace 'any' with the appropriate type for req
-  token: string;
-  user: any; // Replace 'any' with the appropriate type for user
-}
-
 export const Users: CollectionConfig = {
   slug: 'users',
   auth: {
     forgotPassword: {
       generateEmailSubject: () => 'Reset your password',
       generateEmailHTML: async ({ req, token, user }: any) => {
+
+        // Added the direct send as forgotPassword REST on vercel seems to have issue sending email
+        await resend.emails.send({
+          from: "info@smover.noenough.com",
+          to: "peterjunsworth@gmail.com",
+          subject: "Your Magic Sign-in Link",
+          react: MagicLinkEmail({magicLink: token}),
+        });
+        
+        // Once resolved, ideally use this instead of above
         const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
         return `
           <!doctype html>
