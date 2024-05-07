@@ -2,9 +2,6 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf } from '../access/isAdminOrSelf';
 import { isAnonymous } from '@/access/anonymous';
-import { resend } from "../helpers/config";
-import MagicLinkEmail from "../emails/magic-link-email";
-import qs from 'qs';
 
 interface EmailData {
   req: any; // Replace 'any' with the appropriate type for req
@@ -36,33 +33,6 @@ export const Users: CollectionConfig = {
         `
       },
     },
-  },
-  hooks: {
-    afterForgotPassword: [async (args) => {
-      console.log("inside Hook");
-      const email = args?.args?.data?.email;
-      const stringifiedQuery = qs.stringify(
-      {
-        where: {
-          email: {
-            equals: email.toLowerCase(),
-          }
-        }, // ensure that `qs` adds the `where` property, too!
-      },
-      { addQueryPrefix: true },
-    )
-      const userResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users${stringifiedQuery}`)
-      const user = await userResponse.json();
-      console.log("user");
-      console.log(user);
-
-      return await resend.emails.send({
-        from: "info@smover.noenough.com",
-        to: "peterjunsworth@gmail.com",
-        subject: "Your Magic Sign-in Link",
-        react: MagicLinkEmail({magicLink: "1234567890"}),
-      });
-    }],
   },
   admin: {
     useAsTitle: 'email',
