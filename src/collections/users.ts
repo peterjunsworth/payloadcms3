@@ -2,7 +2,9 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf } from '../access/isAdminOrSelf';
 import { isAnonymous } from '@/access/anonymous';
-import { User } from "../../payload-types";
+import { resend } from "../helpers/config";
+import MagicLinkEmail from "../emails/magic-link-email";
+
 
 interface EmailData {
   req: any; // Replace 'any' with the appropriate type for req
@@ -36,9 +38,15 @@ export const Users: CollectionConfig = {
     },
   },
   hooks: {
-    afterForgotPassword: [(args) => {
+    afterForgotPassword: [async (args) => {
       console.log("inside Hook");
       console.log(args);
+      return await resend.emails.send({
+        from: "info@smover.noenough.com",
+        to: "peterjunsworth@gmail.com",
+        subject: "Your Magic Sign-in Link",
+        react: MagicLinkEmail({magicLink: "1234567890"}),
+      });
     }],
   },
   admin: {
