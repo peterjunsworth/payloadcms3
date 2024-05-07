@@ -47,11 +47,11 @@ export default buildConfig({
   i18n: {
     supportedLanguages: { en },
   },
-  email: resendAdapter({
+  /*email: resendAdapter({
     defaultFromAddress: 'info@smover.noenough.com',
     defaultFromName: 'Payload CMS',
     apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
-  }),
+  }),*/
   admin: {
     autoLogin: {
       email: 'dev@payloadcms.com',
