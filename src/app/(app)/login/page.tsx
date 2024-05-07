@@ -4,7 +4,7 @@ import { Button, Image, Input, Link } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function Login() {
+export default function LoginPage() {
 
   const [loginForm, setloginForm] = useState({
     email: "",

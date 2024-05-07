@@ -1,49 +1,18 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { v4 } from "uuid";
 
-export default function Verify() {
+import Verify from "../_components/verify";
+import { useEffect, useState } from "react";
 
-  const router = useRouter();
-  const [searchParams] = useSearchParams();
-  const [_tokenParam, token] = searchParams || [];
-  const uuid = v4();
+export default function VerifyPage() {
+
+  const [token, setToken] = useState("");
 
   useEffect(() => {
-    const verifyUser = async () => {
-      const resetPassword = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/reset-password`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          token,
-          password: uuid,
-        }),
-      });
-      const userData = await resetPassword.json();
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: userData?.user?.email,
-          password: uuid,
-        }),
-      })
-      const json = await res.json();
-      if (json?.token) {
-        router.push('/dashboard');
-      }
-    }
-    if (token) verifyUser();
-  }, [token, router, uuid]);
+    const searchParams = new URLSearchParams(window?.location?.search);
+    setToken(searchParams.get('token') || "")
+  }, []);
 
   return (
-    <>
-      Logging In
-    </>
+    <Verify token={token} />
   );
 }
