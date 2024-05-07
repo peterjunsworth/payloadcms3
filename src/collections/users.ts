@@ -35,6 +35,12 @@ export const Users: CollectionConfig = {
       },
     },
   },
+  hooks: {
+    afterForgotPassword: [(args) => {
+      console.log("inside Hook");
+      console.log(args);
+    }],
+  },
   admin: {
     useAsTitle: 'email',
   },
