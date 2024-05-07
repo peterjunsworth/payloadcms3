@@ -5,6 +5,9 @@ import { v4 } from "uuid";
 export async function POST(req: NextRequest, res: NextResponse) {
   const { email } = await req.json();
   const normailizedEmail = (email ? email.toLowerCase() : "");
+
+  console.log(normailizedEmail);
+
   const stringifiedQuery = qs.stringify(
     {
       where: {
@@ -17,6 +20,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
   )
   const userResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users${stringifiedQuery}`)
   const user = await userResponse.json();
+
+  console.log(user);
 
   if (user?.totalDocs === 0) {
     const uuid = v4();
