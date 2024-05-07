@@ -2,6 +2,9 @@ import type { NextRequest, NextResponse } from "next/server";
 import qs from 'qs';
 import { v4 } from "uuid";
 
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: NextRequest, res: NextResponse) {
   const { email } = await req.json();
   const normailizedEmail = (email ? email.toLowerCase() : "");
@@ -54,10 +57,5 @@ export async function POST(req: NextRequest, res: NextResponse) {
   const prom = await forgotPassword.json();
   console.log(prom);
 
-  setTimeout(() => {
-    console.log("SLEEPING");
-    return Response.json({ success: true });
-  }, 3000)
-
-  
+  return Response.json({ success: true });
 }
