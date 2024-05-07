@@ -13,6 +13,9 @@ export default function Verify({
   const uuid = v4();
 
   useEffect(() => {
+    console.log('####################');
+    console.log(token);
+    console.log(uuid);
     const verifyUser = async () => {
       const resetPassword = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/reset-password`, {
         method: 'POST',
@@ -25,6 +28,7 @@ export default function Verify({
         }),
       });
       const userData = await resetPassword.json();
+      console.log(userData);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/login`, {
         method: 'POST',
         headers: {
@@ -36,6 +40,7 @@ export default function Verify({
         }),
       })
       const json = await res.json();
+      console.log(json);
       if (json?.token) {
         router.push('/dashboard');
       }
