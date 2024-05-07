@@ -63,9 +63,9 @@ export default buildConfig({
     supportedLanguages: { en },
   },
   email: resendAdapter({
-    defaultFromAddress: process.env.FROM_EMAIL || '',
+    defaultFromAddress: 'info@smover.noenough.com',
     defaultFromName: 'Payload CMS',
-    apiKey: process.env.RESEND_API_KEY || '',
+    apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
   }),
   admin: {
     autoLogin: {
