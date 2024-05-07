@@ -2,6 +2,9 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf } from '../access/isAdminOrSelf';
 import { isAnonymous } from '@/access/anonymous';
+import { resend } from "../helpers/config";
+import MagicLinkEmail from "../emails/magic-link-email";
+import qs from 'qs';
 
 interface EmailData {
   req: any; // Replace 'any' with the appropriate type for req
@@ -14,23 +17,14 @@ export const Users: CollectionConfig = {
   auth: {
     forgotPassword: {
       generateEmailSubject: () => 'Reset your password',
-      generateEmailHTML: ({ req, token, user }: any) => {
-        console.log('##$#$#$#$#$#$#$#');
-        const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
-        console.log(resetPasswordURL);
-        return `
-          <!doctype html>
-          <html>
-            <body>
-              <h1>Here is my custom email template!</h1>
-              <p>Hello, ${user.email}!</p>
-              <p>Click below to reset your password.</p>
-              <p>
-                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
-              </p>
-            </body>
-          </html>
-        `
+      generateEmailHTML: async ({ req, token, user }: any) => {
+        await resend.emails.send({
+          from: "info@smover.noenough.com",
+          to: "peterjunsworth@gmail.com",
+          subject: "Your Magic Sign-in Link",
+          react: MagicLinkEmail({magicLink: token}),
+        });
+        return ''
       },
     },
   },

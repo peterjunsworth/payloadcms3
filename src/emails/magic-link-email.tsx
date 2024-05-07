@@ -25,10 +25,10 @@ import {
     return (
       <EmailWrapper>
         <Text className="text-gray-600 text-base text-center">
-          Click and confirm that you want to sign in to Kanvarta. This link will expire in 15 minutes.
+          Click and confirm that you want to sign in to Smover. This link will expire in 15 minutes.
         </Text>
-        <Button className="bg-brand rounded-lg text-white text-base font-bold text-center w-full p-3" href={magicLink}>
-          Sign in to Kanvarta
+        <Button className="bg-brand rounded-lg text-white text-base font-bold text-center w-full p-3" href={`${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${magicLink}`}>
+          Sign in to Smover
         </Button>
         <Text className="text-gray-600 mt-8 text-base text-center">
           Or sign in using this link:
@@ -40,7 +40,7 @@ import {
           Thanks
         </Text>
         <Text className="text-gray-600 text-base font-bold text-center">
-          The Kanvarta Team
+          The Smover Team
         </Text>
       </EmailWrapper>
     );
