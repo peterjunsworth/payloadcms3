@@ -51,7 +51,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
   });
 
   console.log("AFTER");
-  console.log(forgotPassword.json());
+  const prom = await forgotPassword.json();
+  console.log(prom);
 
   return Response.json({ success: true });
 }
