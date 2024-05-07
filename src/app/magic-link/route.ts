@@ -40,7 +40,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   console.log("BEFORE");
 
-  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/forgot-password`, {
+  const forgotPassword = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/forgot-password`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -51,6 +51,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   });
 
   console.log("AFTER");
+  console.log(forgotPassword);
 
   return Response.json({ success: true });
 }

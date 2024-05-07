@@ -16,7 +16,7 @@ export const Users: CollectionConfig = {
     forgotPassword: {
       generateEmailSubject: () => 'Reset your password',
       generateEmailHTML: ({ req, token, user }: any) => {
-        // Use the token provided to allow your user to reset their password
+        console.log('##$#$#$#$#$#$#$#');
         const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
         return `
           <!doctype html>
