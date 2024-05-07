@@ -13,11 +13,6 @@ import {
   } from "@react-email/components";
   import * as React from "react";
   
-  const imgUrl = process.env.BASE_URL
-    ? `${process.env.BASE_URL}`
-    : "";
-
-  
   export default function EmailWrapper({
     children,
   }: {
@@ -27,7 +22,6 @@ import {
     return (
       <Html>
         <Head />
-        <Preview>You're now ready to make live transactions with Stripe!</Preview>
         <Body style={main}>
           <Tailwind
             config={{
@@ -42,24 +36,17 @@ import {
           >
             <Container className="bg-white mx-auto pt-[20px] pb-[48px] mb-[64px]">
               <Section className="px-12">
-                <Img
-                  src={`${imgUrl}/kv-logo.png`}
-                  alt="Kanvarta Logo"
-                  width={70}
-                  height="auto"
-                  className="mx-auto"
-                />
                 <>
                   {children}
                 </>
                 <Hr style={hr} />
                 <Text className="text-gray-600 text-base text-center">
-                  &copy; Kanvarta, LLC. All rights reserved. 
+                  &copy; Smover, Inc. All rights reserved. 
                 </Text>
                 <Text className="text-gray-600 text-base text-center">
                   If you have any questions please
                   <Link
-                      href="mailto:help@kanvarta.com"
+                      href="mailto:help@smover.com"
                       color="primary"
                       className="m-1"
                   >
@@ -68,7 +55,7 @@ import {
                 </Text>
                 <Text className="text-gray-600 text-base text-center">
                   <Link
-                      href="https://kanvarta.com/privacy"
+                      href="https://smover.com/privacy"
                       color="primary"
                       className="m-1"
                   >
