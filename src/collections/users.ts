@@ -2,31 +2,11 @@ import { CollectionConfig } from 'payload/types';
 import { isAdmin, isAdminFieldLevel } from '../access/isAdmin';
 import { isAdminOrSelf } from '../access/isAdminOrSelf';
 import { isAnonymous } from '@/access/anonymous';
+import { truncate } from 'fs/promises';
 
 export const Users: CollectionConfig = {
   slug: 'users',
-  auth: {
-    forgotPassword: {
-      generateEmailSubject: () => 'Reset your password',
-      generateEmailHTML: async ({ req, token, user }: any) => {
-        // Once resolved, ideally use this instead of above
-        const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`
-        return `
-          <!doctype html>
-          <html>
-            <body>
-              <h1>Here is my custom email template!</h1>
-              <p>Hello, ${user.email}!</p>
-              <p>Click below to reset your password.</p>
-              <p>
-                <a href="${resetPasswordURL}">${resetPasswordURL}</a>
-              </p>
-            </body>
-          </html>
-        `
-      },
-    },
-  },
+  auth: true,
   admin: {
     useAsTitle: 'email',
   },
