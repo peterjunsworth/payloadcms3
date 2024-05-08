@@ -13,12 +13,12 @@ export const Users: CollectionConfig = {
       generateEmailHTML: async ({ req, token, user }: any) => {
 
         // Added the direct send as forgotPassword REST on vercel seems to have issue sending email
-        await resend.emails.send({
+        /*await resend.emails.send({
           from: "info@smover.noenough.com",
           to: "peterjunsworth@gmail.com",
           subject: "Your Magic Sign-in Link",
           react: MagicLinkEmail({magicLink: token}),
-        });
+        });*/
         
         // Once resolved, ideally use this instead of above
         const resetPasswordURL = `${process.env.NEXT_PUBLIC_BASE_URL}/verify?token=${token}`

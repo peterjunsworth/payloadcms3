@@ -17,7 +17,9 @@ import { ContactRequests } from './src/collections/contactRequests';
 import { Pages } from './src/collections/pages';
 import { Agent } from './src/collections/agent';
 import { seed } from './seed';
-import { resendAdapter } from '@payloadcms/email-resend'
+import { resendAdapter } from '@payloadcms/email-resend';
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer';
+
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -53,6 +55,19 @@ export default buildConfig({
     defaultFromName: 'Payload CMS',
     apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
   }),*/
+  email: nodemailerAdapter({
+    defaultFromAddress: 'info@devsforcode.com',
+    defaultFromName: 'Payload',
+    // Nodemailer transportOptions
+    transportOptions: {
+      host: 'smtp2go.com',
+      port: 587,
+      auth: {
+        user: 'devsforcode.com',
+        pass: 'zrkmfTLHC7NmXHhn',
+      },
+    },
+  }),
   admin: {
     autoLogin: {
       email: 'dev@payloadcms.com',

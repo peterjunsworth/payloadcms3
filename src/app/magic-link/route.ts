@@ -50,7 +50,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }),
   });
 
-  await forgotPassword.json();
+  const fp = await forgotPassword.json();
+
+  console.log('##########');
+  console.log(fp);
 
   return Response.json({ success: true });
 }
