@@ -17,7 +17,7 @@ import { ContactRequests } from './src/collections/contactRequests';
 import { Pages } from './src/collections/pages';
 import { Agent } from './src/collections/agent';
 import { seed } from './seed';
-import { resendAdapter } from '@payloadcms/email-resend'
+import { resendAdapter } from '@payloadcms/email-resend';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,7 +51,7 @@ export default buildConfig({
   email: resendAdapter({
     defaultFromAddress: 'info@smover.noenough.com',
     defaultFromName: 'Payload CMS',
-    apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
+    apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw'
   }),
   admin: {
     autoLogin: {
