@@ -7,7 +7,9 @@
 Node Version: v20.11.1
 
 > Login Page: src/app/(app)/login/page.tsx
+
 > Forgot Password Endpoint: src/app/magic-link/route.ts
+
 > Generate HTML Email: src/collections/users.ts
 
 
