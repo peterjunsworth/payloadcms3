@@ -14,8 +14,8 @@ export const Users: CollectionConfig = {
 
         // Added the direct send as forgotPassword REST on vercel seems to have issue sending email
         /*await resend.emails.send({
-          from: "info@smover.noenough.com",
-          to: "peterjunsworth@gmail.com",
+          from: process.env.FROM_EMAIL || '',
+          to: "user@email.com",
           subject: "Your Magic Sign-in Link",
           react: MagicLinkEmail({magicLink: token}),
         });*/

@@ -50,24 +50,24 @@ export default buildConfig({
     supportedLanguages: { en },
   },
   // COMMENTING OUT THIS AS VERCEL HAS ISSUE SENDING VIA REST
-  /*email: resendAdapter({
-    defaultFromAddress: 'info@smover.noenough.com',
+  email: resendAdapter({
+    defaultFromAddress: process.env.FROM_EMAIL || '',
     defaultFromName: 'Payload CMS',
-    apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw',
-  }),*/
-  email: nodemailerAdapter({
+    apiKey: process.env.RESEND_API_KEY || ''
+  }),
+  /*email: nodemailerAdapter({
     defaultFromAddress: 'info@devsforcode.com',
     defaultFromName: 'Payload',
     // Nodemailer transportOptions
     transportOptions: {
-      host: 'smtp2go.com',
+      host: process.env.SMTP_HOST || '',
       port: 587,
       auth: {
-        user: 'devsforcode.com',
-        pass: 'zrkmfTLHC7NmXHhn',
+        user: process.env.SMTP_USER || '',
+        pass: process.env.SMTP_PASS || '',
       },
     },
-  }),
+  }),*/
   admin: {
     autoLogin: {
       email: 'dev@payloadcms.com',

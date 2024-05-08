@@ -1,5 +1,17 @@
 # Payload 3.0 Beta Demo
 
+
+
+### Troubleshooting instructions
+
+Node Version: v20.11.1
+
+Login Page: src/app/(app)/login/page.tsx
+Forgot Password Endpoint: src/app/magic-link/route.ts
+Generate HTML Email: src/collections/users.ts
+
+
+
 This repo showcases a demo of the Payload 3.0 Beta running completely within Next.js.
 
 > [!IMPORTANT]
