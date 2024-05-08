@@ -16,8 +16,8 @@ import { Media } from './src/collections/media';
 import { ContactRequests } from './src/collections/contactRequests';
 import { Pages } from './src/collections/pages';
 import { Agent } from './src/collections/agent';
-import { seed } from './seed';
-import { resendAdapter } from '@payloadcms/email-resend';
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import nodemailer from 'nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -48,10 +48,18 @@ export default buildConfig({
     supportedLanguages: { en },
   },
   // COMMENTING OUT THIS AS VERCEL HAS ISSUE SENDING VIA REST
-  email: resendAdapter({
-    defaultFromAddress: 'info@smover.noenough.com',
-    defaultFromName: 'Payload CMS',
-    apiKey: 're_DRdVHBSc_2tqRYjjpLb5acrAdFoeBpWNw'
+  email: nodemailerAdapter({
+    defaultFromAddress: 'info@devsforcode.com',
+    defaultFromName: 'Payload',
+    // Nodemailer transportOptions
+    transportOptions: {
+      host: 'smtp2go.com',
+      port: 587,
+      auth: {
+        user: 'devsforcode.com',
+        pass: 'zrkmfTLHC7NmXHhn',
+      },
+    },
   }),
   admin: {
     autoLogin: {
